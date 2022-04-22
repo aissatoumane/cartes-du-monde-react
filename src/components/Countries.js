@@ -41,6 +41,7 @@ const Countries = () => {
                         <input 
                         type="radio" 
                         id={continent} name="continentRadio" 
+                        checked={continent === selectedRadio}
                         onChange={(e) => setSelectedRadio(e.target.id)}/>                        
                         <label htmlFor={continent}> {continent}</label>
                     </li>
@@ -51,8 +52,17 @@ const Countries = () => {
             {/* il est obligatoire de donner une key unique à chaque enfant d'une liste */}
 
             {/* pour qu'on ne puisse cocher qu'un élément, ajouter un name */}
+
+            {selectedRadio && <button onClick={() => setSelectedRadio("")}> Annuler la recherche </button>}
+
+            {/* en JS, quand on note {element} (ex : {selectedRadio}), cela veut dire : {selectedRadio === true} */}
+
+            {/* on ajoute un event onClick pour faire en sorte que quand le user clique sur le button, la recherche reparte de zéro et le button est de nouveau caché */}
+            
             <ul>
                 {data
+                .filter((country) => country.continents[0].includes(selectedRadio))
+                .sort((a, b) => b.population - a.population)
                 .slice(0, rangeValue)
                 .map((country, index) => (
                         <Card key={index} country={country} />
@@ -60,9 +70,16 @@ const Countries = () => {
             /* la props débute à country
                country = nom de la donnée passée au composant enfant Card */
 
-/* *************************************************** */
-            /* slice : permet de limiter l'affichage à un certain nombre 
+/* *********************************************************************** */
+                
+                /* sort : permet de trier des données dans l'ordre croissant 
+                -- b.population - a.population : du + grand au + petit */
+                /* filter : permet de filtrer les drapeaux par continent
+                -- country.continent[0].includes(selectedRadio) : on affiche en fonction de l'index du continent du pays sélectionné par l'user
+                */
+                /* slice : permet de limiter l'affichage à un certain nombre 
                ex : .slice(0, 5) = coupe à partir de 0 et ne garde que 5 éléments */
+                /* map : afficher autant de fois que nécessaire les éléments d'un tableau */
                 }
             </ul>
         </div>
