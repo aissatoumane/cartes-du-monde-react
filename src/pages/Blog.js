@@ -72,14 +72,12 @@ const Blog = () => {
                 />
 
                 <textarea 
-                name='textarea'
                 style={{ border: error ? "1px solid red" : "1px solid #61dafb" }}
                 /* la ligne ci-dessus applique un style conditionnel à la textarea (elle devient rouge quand on a - de 140 caractères et reprend sa couleur normale dans le cas contraire) */
                 placeholder='Message' 
                 onChange={(e) => setContent(e.target.value)}
                 value={content}
-                > 
-                </textarea>
+                ></textarea>
                 {error && <p> Veuillez écrire un minimum de 140 caractères </p>}
                 {/* la ligne ci-dessus veut dire que si j'ai une erreur, je renvoie le <p> */}
 
