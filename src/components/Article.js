@@ -40,6 +40,10 @@ const Article = ({ article }) => {
 
     const handleDelete = () => {
         axios.delete("http://localhost:3004/articles/" + article.id)
+        window.location.reload();
+        /* on recharge la page sur laquelle on se trouve.
+        Avantage : l'article supprimé n'est plus affiché après le rechargement de la page
+        */
     }
 
     return (
